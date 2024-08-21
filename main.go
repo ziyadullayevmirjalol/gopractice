@@ -1,10 +1,12 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 )
 
 func main() {
+
 	Map()
 	fmt.Println()
 	Array()
@@ -27,8 +29,33 @@ func main() {
 	animal = Cat{}
 	fmt.Println("Cat", animal.Sound())
 
+	fmt.Println()
+
+	InterfaceAsGenerics("hello")
+	InterfaceAsGenerics(1)
+	InterfaceAsGenerics(2.1)
+
+	fmt.Println()
+
+	InterfaceToPassNumberOfArguments(1, 2.1, "23")
+	fmt.Println()
+
+	TypeAssertions()
+	fmt.Println()
+
+	Errors()
+
+	fmt.Println()
+
+	if CheckName("Jason") == nil {
+		fmt.Println(true)
+	} else {
+		fmt.Println("youre failed")
+	}
+
 }
 
+// ////////////////////////////////////////////////////////////////////////////
 func Map() {
 	var mymap = make(map[string]interface{})
 
@@ -103,4 +130,39 @@ type Dog struct{}
 
 func (c Dog) Sound() string {
 	return "Bark"
+}
+
+func InterfaceAsGenerics(i interface{}) {
+	fmt.Println(i)
+}
+
+func InterfaceToPassNumberOfArguments(i ...interface{}) {
+	fmt.Println(i)
+}
+
+func TypeAssertions() {
+	var i interface{}
+
+	i = "1"
+	intAssign, boolval := i.(int)
+	// using boolval to avoid panic
+	fmt.Println(intAssign, boolval)
+}
+
+func Errors() {
+
+	msg := "jaso"
+
+	myerr := errors.New("You hafta be Jason!")
+	if msg != "jason" {
+		fmt.Println(myerr)
+	}
+}
+
+func CheckName(name string) error {
+	if name != "Jason" {
+		newErr := errors.New("You hafta be Jason!")
+		return newErr
+	}
+	return nil
 }
