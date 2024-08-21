@@ -9,13 +9,18 @@ func main() {
 
 	Map()
 	fmt.Println()
+
 	Array()
 	fmt.Println()
+
 	EmptyMap()
 	fmt.Println()
+
 	InitializedWithNoElementsMap()
 	fmt.Println()
+
 	Slice()
+	fmt.Println()
 
 	var number = 1
 	PointerFunction(&number)
@@ -28,13 +33,11 @@ func main() {
 
 	animal = Cat{}
 	fmt.Println("Cat", animal.Sound())
-
 	fmt.Println()
 
 	InterfaceAsGenerics("hello")
 	InterfaceAsGenerics(1)
 	InterfaceAsGenerics(2.1)
-
 	fmt.Println()
 
 	InterfaceToPassNumberOfArguments(1, 2.1, "23")
@@ -44,7 +47,6 @@ func main() {
 	fmt.Println()
 
 	Errors()
-
 	fmt.Println()
 
 	if CheckName("Jason") == nil {
@@ -52,6 +54,7 @@ func main() {
 	} else {
 		fmt.Println("youre failed")
 	}
+	fmt.Println()
 
 }
 
