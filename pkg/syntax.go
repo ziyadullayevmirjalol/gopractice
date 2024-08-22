@@ -86,7 +86,7 @@ func InterfaceAsGenerics(i interface{}) {
 }
 
 func InterfaceToPassNumberOfArguments(i ...interface{}) {
-	fmt.Println(i)
+	fmt.Println(i...)
 }
 
 func TypeAssertions() {
@@ -102,7 +102,7 @@ func Errors() {
 
 	msg := "jaso"
 
-	myerr := errors.New("You hafta be Jason!")
+	myerr := errors.New("you hafta be Jason!")
 	if msg != "jason" {
 		fmt.Println(myerr)
 	}
@@ -110,7 +110,7 @@ func Errors() {
 
 func CheckName(name string) error {
 	if name != "Jason" {
-		newErr := errors.New("You hafta be Jason!")
+		newErr := errors.New("you hafta be Jason!")
 		return newErr
 	}
 	return nil
@@ -118,7 +118,7 @@ func CheckName(name string) error {
 
 func HandlingErrorsWithErrorf(age int) {
 
-	error := fmt.Errorf("%v is a negative value\n", age)
+	error := fmt.Errorf("%v is a negative value", age)
 	if age < 0 {
 		fmt.Print(error)
 	} else {
@@ -131,7 +131,7 @@ type error interface {
 }
 
 type DevisionByZeroMessage struct {
-	message string
+	Message string
 }
 
 func (z DevisionByZeroMessage) Error() string {
