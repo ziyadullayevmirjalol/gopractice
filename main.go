@@ -7,6 +7,13 @@ import (
 
 func main() {
 
+	defer fmt.Println("should be runned first!")
+	defer fmt.Println("should be runned second!")
+	defer fmt.Println("should be runned third!")
+	defer fmt.Println("should be runned fourth!")
+	defer fmt.Println("should be runned fifth!")
+	defer fmt.Println("should be runned sixth!")
+
 	Map()
 	fmt.Println()
 
@@ -55,6 +62,29 @@ func main() {
 		fmt.Println("youre failed")
 	}
 	fmt.Println()
+
+	HandlingErrorsWithErrorf(-12)
+	fmt.Println()
+
+	number1 := 15
+	number2 := 0
+
+	result, err := divide(number1, number2)
+
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Printf("Result: %d", result)
+	}
+	fmt.Println()
+
+	ToHandlePanic(4, 2)
+	ToHandlePanic(4, 1)
+	ToHandlePanic(4, 0)
+
+	division(4, 2)
+	division(8, 0)
+	division(2, 8)
 
 }
 
@@ -168,4 +198,63 @@ func CheckName(name string) error {
 		return newErr
 	}
 	return nil
+}
+
+func HandlingErrorsWithErrorf(age int) {
+
+	error := fmt.Errorf("%v is a negative value\n", age)
+	if age < 0 {
+		fmt.Print(error)
+	} else {
+		fmt.Println("Age is %v", age)
+	}
+}
+
+type error interface {
+	Error() string
+}
+
+type DevisionByZeroMessage struct {
+	message string
+}
+
+func (z DevisionByZeroMessage) Error() string {
+	return "Number cannot be divided by zerooo, Call of Doooo, Advanced Poo Poo"
+}
+
+func divide(n1 int, n2 int) (int, error) {
+	if n2 == 0 {
+		return 0, &DevisionByZeroMessage{}
+	} else {
+		return n1 / n2, nil
+	}
+}
+
+func division(num1, num2 int) {
+
+	if num2 == 0 {
+		panic("Cannot divide a number by zero")
+	} else {
+		result := num1 / num2
+		fmt.Println("Result: ", result)
+	}
+}
+
+func HandlePanic() {
+	h := recover()
+	if h != nil {
+		fmt.Println("Recovered message:", h)
+	}
+}
+
+func ToHandlePanic(n1 int, n2 int) {
+	defer HandlePanic()
+
+	if n2 == 0 {
+		panic("num2 is 0")
+	} else {
+		res := n1 / n2
+		fmt.Println("Res:", res)
+	}
+
 }
